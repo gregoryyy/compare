@@ -73,22 +73,34 @@ Effect:
 - `--mode mirror`: Mirror A → B (like rsync: copy + delete removed files in B)
 
 
-## 4. `dedup.py` — Deduplication Tool
-TODO: Finds duplicates between files (hash-based) and allows deleting and hard-linking the duplicates.
+## 4. `fdedup.py` — Deduplication Tool
+Finds duplicates between files (hash-based) and allows deleting and hard-linking the duplicates.
 
 ```
-python dedupy.py /path/to/source --mode find
-python dedupy.py /path/to/source --mode dedup
+python fdedup.py /path/to/source --mode find
+python fdedup.py /path/to/source --mode link
 ```
 
 Effect:
 
 - `--mode find`: Find duplicate files
-- `--mode dedup`: Replace all duplicate files beyond the first one (the master file) with hard links to the master
+- `--mode link`: Replace all duplicate files beyond the first one (the master file) with hard links to the master
+
+Output:
+
+- List of duplicate files:
+```
+hash
+   path1
+   path2
+hash
+   path3
+   path4
+```
 
 # Roadmap
 
-- Duplicates finder and deduplication (see 4.)
+- Duplicates finder and deduplication (see 4.) DONE.
 - Integrate date, file size checks as optional
 - Option `dry-run`
 - Logging with `quiet` to `verbose` options
