@@ -1,18 +1,19 @@
-# BuChk: Backup checker
+# fundiff: diff and undiff files and directories
 
-Check differences between two sets of folders, e.g., original and backup
+A Python-based toolkit for comparing, analyzing, and synchronizing directories using SHA-256 file hashes. Useful for backup verification, duplicate detection, and efficient rsync-like synchronization.
 
-# 1 Python scripts
+## 1. fhash.py — File Hash Scanner
+Scans one or more directories and computes SHA-256 hashes for all files using parallel processing.
 
-## operate
+## 2. compare_dirs.py — Comparison Tool
+Compares two directory trees or finds duplicates within a directory set.
 
-## create hashes
+## 3. fsync.py — Synchronization Tool
+Synchronizes two directory trees (source → target) in various modes (copy, mirror) based on file content hashes.
 
-fhash
+# Appendix: Shell-based operation
 
-# 2 Shell-based operation
-
-
+A variant of this exists just using a shell (MacOS, possibly with homebrew).
 
 ## create hashes
 find original1 original2 -type f -exec shasum -a 256 {} + | sort > originals.txt

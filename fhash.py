@@ -55,10 +55,10 @@ def scan_folder_parallel(base_dirs, max_workers=8):
     return path_to_hash, hash_to_paths
 
 
-if __file__ == "__main__":
+def main():
     import sys
     if len(sys.argv) < 2:
-        print("Usage: python buchk.py <directory1> <directory2> ...")
+        print("Usage: python fhash.py <directory1> <directory2> ...")
         sys.exit(1)
 
     directories = sys.argv[1:]
@@ -70,3 +70,6 @@ if __file__ == "__main__":
     print("\nHash map:")
     for h, paths in hash_map.items():
         print(f"{h}: {', '.join(paths)}")
+
+if __name__ == "__main__":
+    main()
