@@ -3,10 +3,12 @@ import argparse
 from fhash import scan_folder_parallel
 
 def find_duplicates(directories, max_workers=8):
+    '''Find duplicate files across multiple directories based on their hashes.'''
     _, hash_to_paths = scan_folder_parallel(directories, max_workers)
     return {h: sorted(paths) for h, paths in hash_to_paths.items() if len(paths) > 1}
 
 def replace_with_hardlinks(duplicates, base_dir):
+    '''Replace duplicate files with hard links to the first occurrence.'''
     for h, paths in duplicates.items():
         master = os.path.join(base_dir, paths[0])
         for dup_rel in paths[1:]:
@@ -19,12 +21,14 @@ def replace_with_hardlinks(duplicates, base_dir):
                 print(f"[ERROR] Could not link {dup_rel}: {e}")
 
 def print_duplicates(duplicates):
+    '''Print the found duplicates in a readable format.'''
     for h, paths in duplicates.items():
         print(h)
         for p in paths:
             print(f"   {p}")
 
 def main():
+    '''Main function to parse arguments and find duplicates or create hard links.'''
     parser = argparse.ArgumentParser(description="Find and deduplicate files by hard linking")
     parser.add_argument("directories", nargs="+", help="Directories to scan for duplicates")
     parser.add_argument("--mode", choices=["find", "link"], default="find", help="Operation mode")
