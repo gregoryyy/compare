@@ -1,0 +1,6 @@
+**/.DS_Store
+**/*.txt
+rmlint.*
+**/*.pyc
+**/*.pyo
+**/__pycache__/
